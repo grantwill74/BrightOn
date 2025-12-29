@@ -440,6 +440,7 @@
 				
 (fn clear-state []
 	(clear-play-area-tiles)
+	(music)
 
 	(set lite-state 0xFFFFFFFFFFFFFFFF)
 	(set solution 0)
@@ -456,17 +457,18 @@
 )
 
 (fn won-game? []
-	(= choices solution))
+	(= lite-state 0xFFFFFFFFFFFFFFFF)
+)
 				
 (fn new-game [diff seed ncols nrows]
 	"start a new game with a given
 	 difficulty (in number of moves) and
 		seed."
+	(clear-state)
+	
 	(music 1 0 0 false)
 	(math.randomseed seed)
 	(set current-seed seed)
-	
-	(clear-state)
 	
 	(set field-w ncols)
 	(set field-h nrows)
@@ -538,24 +540,22 @@
  (local diff difficulty)
  (when (. mouse-went-down 1)
  	(case where
-  	"hint"
-    (set showing-hint true)
+  		"hint"
+    	(set showing-hint true)
  		"ng3x3"				
-   	(new-game diff (gen-seed) 3 3)
-   "ng4x4"
-   	(new-game diff (gen-seed) 4 4)
-		 "ng5x5"
-				(new-game diff (gen-seed) 5 5)
-			"ng6x6"
-				(new-game diff (gen-seed) 6 6)
-			"ng7x7"
-				(new-game diff (gen-seed) 7 7)
-			"ng8x8"
-				(new-game diff (gen-seed) 8 8)
-			"reset"
-				(new-game diff current-seed field-w field-h)
-		)
-	)
+		(new-game diff (gen-seed) 3 3)
+		"ng4x4"
+		(new-game diff (gen-seed) 4 4)
+		"ng5x5"
+		(new-game diff (gen-seed) 5 5)
+		"ng6x6"
+		(new-game diff (gen-seed) 6 6)
+		"ng7x7"
+		(new-game diff (gen-seed) 7 7)
+		"ng8x8"
+		(new-game diff (gen-seed) 8 8)
+		"reset"
+		(new-game diff current-seed field-w field-h)))
  (when 
  	(and
  		(not game-won)
