@@ -62,12 +62,12 @@
  ret)
  
 (local [scr-width-px scr-height-px]
-							[240          136])
+       [240          136])
 (var   [field-w field-h]
-							[8       8]) ; start with max
+       [8       8]) ; start with max
 ;; top left tile coord of first light
 (local [field-x field-y]
-							[13        1])
+       [13        1])
 (local [field-bord-x field-bord-y]
        [13           1])
 
@@ -551,7 +551,7 @@
 			"ng7x7"
 				(new-game diff (gen-seed) 7 7)
 			"ng8x8"
-			 (new-game diff (gen-seed) 8 8)
+				(new-game diff (gen-seed) 8 8)
 			"reset"
 				(new-game diff current-seed field-w field-h)
 		)
